@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Glow Up Run</title>
+    <meta
+      name="description"
+      content="لعبة صغيرة: اهربي من الأكل واجمعي عناصر العناية عشان تسوي Glow Up."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="bg"></div>
+    <header class="topbar">
+      <div class="brand">
+        <div class="badge">GLAM</div>
+        <div class="titleWrap">
+          <h1 class="title">Glow Up Run</h1>
+          <p class="subtitle">اهربي من الأكل… واجمعي “self‑care” عشان تكملي التوهّج</p>
+        </div>
+      </div>
+
+      <div class="hud">
+        <div class="hudItem">
+          <div class="hudLabel">النتيجة</div>
+          <div class="hudValue" id="score">0</div>
+        </div>
+        <div class="hudItem">
+          <div class="hudLabel">Glow</div>
+          <div class="glowBar" aria-label="Glow meter">
+            <div class="glowFill" id="glowFill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="hudItem">
+          <div class="hudLabel">قلوب</div>
+          <div class="hudValue" id="lives">3</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <section class="card">
+        <canvas id="game" width="900" height="520" aria-label="Game canvas"></canvas>
+
+        <div class="overlay" id="overlay" role="dialog" aria-modal="true">
+          <div class="overlayPanel">
+            <div class="overlayTop">
+              <div class="pill" id="statusPill">جاهزة؟</div>
+              <div class="tiny">ثيم “pageant / neon‑pastel” مستوحى بالأجواء، بدون نسخ مباشر.</div>
+            </div>
+
+            <h2 class="overlayTitle" id="overlayTitle">Glow Up Run</h2>
+            <p class="overlayText" id="overlayText">
+              تحركي يمين/يسار، تجنبي الأكل، واجمعي عناصر العناية عشان تعبي عداد الـGlow. إذا وصل
+              100% تفوزي.
+            </p>
+
+            <div class="controls">
+              <div class="control">
+                <div class="key">←</div>
+                <div class="key">→</div>
+                <div class="desc">تحريك</div>
+              </div>
+              <div class="control">
+                <div class="key">Space</div>
+                <div class="desc">بدء / إيقاف مؤقت</div>
+              </div>
+              <div class="control">
+                <div class="key">R</div>
+                <div class="desc">إعادة</div>
+              </div>
+              <div class="control">
+                <div class="key">Touch</div>
+                <div class="desc">اسحبي على الجوال</div>
+              </div>
+            </div>
+
+            <div class="buttons">
+              <button class="btn primary" id="startBtn">ابدأ اللعبة</button>
+              <button class="btn ghost" id="howBtn">كيف ألعب؟</button>
+              <button class="btn" id="shareBtn" style="display: none">حفظ صورة الفوز</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side">
+        <div class="sideCard">
+          <h3 class="sideTitle">الهدف</h3>
+          <ul class="list">
+            <li><strong>تجنبي</strong> الأكل اللي ينزل (يزيد “temptation”).</li>
+            <li><strong>اجمعي</strong> عناصر self‑care عشان يطلع الـGlow.</li>
+            <li><strong>افوزي</strong> لما يوصل Glow إلى 100%.</li>
+          </ul>
+        </div>
+
+        <div class="sideCard">
+          <h3 class="sideTitle">العناصر</h3>
+          <div class="chips" id="chips">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <div class="sideCard">
+          <h3 class="sideTitle">تلميح</h3>
+          <p class="muted">
+            كل ما زادت النتيجة، تزيد سرعة النزول شوي—بس عناصر العناية تسهّل عليك (تعطيك
+            “sparkle shield” ثواني).
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <div class="muted">
+        ملاحظة: هذا عمل أصلي “inspired vibes” وليس نسخة من أي مسلسل/علامة.
+      </div>
+      <div class="muted" style="margin-top: 8px">
+        الموقع من صنع <strong>long</strong> • سيرفرنا دسكورد:
+        <a href="https://discord.gg/insatiable" target="_blank" rel="noreferrer">discord.gg/insatiable</a>
+      </div>
+      <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+        <a
+          class="discordBtn"
+          href="https://discord.gg/insatiable"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Join our Discord server"
+        >
+          <span class="discordIcon" aria-hidden="true">
+            <svg viewBox="0 0 256 199" width="18" height="18" focusable="false">
+              <path
+                fill="currentColor"
+                d="M216.9 16.5A208.1 208.1 0 0 0 164 0c-2.3 4.2-5 9.7-6.8 14.1a193.6 193.6 0 0 0-58.4 0C97 9.7 94.2 4.2 91.9 0A208.2 208.2 0 0 0 39 16.5C6 66.3-2.9 114.9 1.5 162.8A210.5 210.5 0 0 0 65 195.9c5.2-7.1 9.9-14.6 13.9-22.6a135.8 135.8 0 0 1-21.9-10.4c1.8-1.3 3.6-2.7 5.3-4.1 42 19.6 87.6 19.6 129.1 0 1.7 1.4 3.5 2.8 5.3 4.1a134.9 134.9 0 0 1-22 10.4c4 8 8.7 15.6 13.9 22.6a210.3 210.3 0 0 0 63.5-33.1c5.2-55.5-8.9-103.7-35.3-146.2ZM85.7 135.6c-12.5 0-22.8-11.6-22.8-25.9 0-14.3 10-25.9 22.8-25.9 12.8 0 23 11.6 22.8 25.9 0 14.3-10 25.9-22.8 25.9Zm84.6 0c-12.5 0-22.8-11.6-22.8-25.9 0-14.3 10-25.9 22.8-25.9 12.8 0 23 11.6 22.8 25.9 0 14.3-10 25.9-22.8 25.9Z"
+              />
+            </svg>
+          </span>
+          <span>ادخلي الدسكورد</span>
+        </a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
